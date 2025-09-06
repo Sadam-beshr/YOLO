@@ -8,11 +8,12 @@ WORKDIR /app
 COPY requirements.txt .
 
 # 4. تثبيت اعتماديات نظام التشغيل التي تحتاجها OpenCV
-# هذا هو السطر الجديد والمهم لحل المشكلة
-RUN apt-get update && apt-get install -y libgl1-mesa-glx
+# هذا هو السطر المُصحّح. نستخدم libgl1 بدلاً من libgl1-mesa-glx
+RUN apt-get update && apt-get install -y libgl1
 
 # 5. تثبيت مكتبات Python
-RUN pip install --no-cache-dir -r requirements.txt
+# أضفت --timeout=1000 لزيادة وقت الانتظار أثناء تحميل المكتبات الكبيرة مثل torch
+RUN pip install --no-cache-dir --timeout=1000 -r requirements.txt
 
 # 6. نسخ باقي ملفات المشروع
 COPY . .
