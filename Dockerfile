@@ -31,4 +31,4 @@ COPY . .
 EXPOSE 5000
 
 # 9. الأمر الذي سيتم تشغيله عند بدء تشغيل الحاوية
-CMD ["gunicorn", "--workers", "1", "--bind", "0.0.0.0:5000", "app:app"]
+CMD ["gunicorn", "--workers", "1", "--bind", "0.0.0.0:5000", "--timeout", "300", "app:app"]
