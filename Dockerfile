@@ -36,4 +36,5 @@ EXPOSE 5000
 # 9. الأمر الذي سيتم تشغيله عند بدء تشغيل الحاوية
 # أضفنا --preload لتحميل التطبيق قبل إنشاء العمال
 # وأبقينا على --timeout لضمان معالجة الطلبات الطويلة
-CMD ["gunicorn", "--workers", "1", "--bind", "0.0.0.0:5000", "--timeout", "300", "--preload", "app:app"]
+#CMD ["gunicorn", "--workers", "1", "--bind", "0.0.0.0:5000", "--timeout", "300", "--preload", "app:app"]
+CMD ["python", "app.py"]
