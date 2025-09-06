@@ -1,16 +1,20 @@
 # 1. Core ML Libraries (Server/CPU specific versions)
-torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
-torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu
+# Using newer torch versions compatible with modern ultralytics
+torch==2.3.0 --index-url https://download.pytorch.org/whl/cpu
+torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cpu
+
+# Use the "headless" version of OpenCV, which is designed for servers without a GUI
 opencv-python-headless==4.9.0.80
 
 # 2. Application Libraries
-Flask==3.0.0
-Flask-Cors==4.0.0
-gunicorn==21.2.0
+Flask==3.0.3
+Flask-Cors==4.0.1
+gunicorn==22.0.0
 
 # 3. AI & Utility Libraries
-ultralytics # <--- !!! قمنا بإزالة رقم الإصدار من هنا !!!
+# Pinning to the EXACT version used during training to solve the C3k2 error
+ultralytics==8.3.195
 gTTS==2.5.1
-Pillow==10.1.0
-numpy==1.26.2
+Pillow==10.3.0
+numpy==1.26.4
 uuid
