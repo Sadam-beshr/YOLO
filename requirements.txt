@@ -1,9 +1,6 @@
 # 1. Core ML Libraries (Server/CPU specific versions)
-# We specify the CPU-only version of PyTorch to avoid any CUDA conflicts
 torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu
-
-# Use the "headless" version of OpenCV, which is designed for servers without a GUI
 opencv-python-headless==4.9.0.80
 
 # 2. Application Libraries
@@ -12,7 +9,7 @@ Flask-Cors==4.0.0
 gunicorn==21.2.0
 
 # 3. AI & Utility Libraries
-ultralytics==8.0.220 # Using a specific, stable version
+ultralytics # <--- !!! قمنا بإزالة رقم الإصدار من هنا !!!
 gTTS==2.5.1
 Pillow==10.1.0
 numpy==1.26.2
