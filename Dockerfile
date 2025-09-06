@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 # 6. تثبيت مكتبات Python
-# أضفت --timeout=1000 لزيادة وقت الانتظار أثناء تحميل المكتبات الكبيرة
 RUN pip install --no-cache-dir --timeout=1000 -r requirements.txt
 
 # 7. نسخ باقي ملفات المشروع
