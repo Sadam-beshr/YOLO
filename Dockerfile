@@ -1,25 +1,35 @@
 # 1. استخدام صورة Python رسمية كأساس
 FROM python:3.9-slim
 
-# 2. تحديد مجلد العمل داخل الحاوية
+# 2. إعداد متغير بيئة لمنع apt من طلب إدخال تفاعلي
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 3. تحديد مجلد العمل داخل الحاوية
 WORKDIR /app
 
-# 3. نسخ ملفات المشروع إلى الحاوية
+# 4. تثبيت جميع اعتماديات نظام التشغيل التي تحتاجها OpenCV و gTTS
+# هذه هي القائمة الشاملة لحل جميع مشاكل "cannot open shared object file"
+RUN apt-get update && apt-get install -y \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# 5. نسخ ملف المتطلبات
 COPY requirements.txt .
 
-# 4. تثبيت اعتماديات نظام التشغيل التي تحتاجها OpenCV
-# هذا هو السطر المُصحّح. نستخدم libgl1 بدلاً من libgl1-mesa-glx
-RUN apt-get update && apt-get install -y libgl1
-
-# 5. تثبيت مكتبات Python
-# أضفت --timeout=1000 لزيادة وقت الانتظار أثناء تحميل المكتبات الكبيرة مثل torch
+# 6. تثبيت مكتبات Python
+# أضفت --timeout=1000 لزيادة وقت الانتظار أثناء تحميل المكتبات الكبيرة
 RUN pip install --no-cache-dir --timeout=1000 -r requirements.txt
 
-# 6. نسخ باقي ملفات المشروع
+# 7. نسخ باقي ملفات المشروع
 COPY . .
 
-# 7. تحديد المنفذ الذي سيعمل عليه التطبيق داخل الحاوية
+# 8. تحديد المنفذ الذي سيعمل عليه التطبيق داخل الحاوية
 EXPOSE 5000
 
-# 8. الأمر الذي سيتم تشغيله عند بدء تشغيل الحاوية
+# 9. الأمر الذي سيتم تشغيله عند بدء تشغيل الحاوية
 CMD ["gunicorn", "--workers", "1", "--bind", "0.0.0.0:5000", "app:app"]
