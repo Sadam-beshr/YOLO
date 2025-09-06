@@ -10,6 +10,8 @@ COPY requirements.txt .
 
 # 4. تثبيت المكتبات
 # --no-cache-dir لتقليل حجم الصورة
+RUN apt-get update && apt-get install -y libgl1-mesa-glx
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 5. نسخ باقي ملفات المشروع
