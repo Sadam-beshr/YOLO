@@ -1,0 +1,8 @@
+Flask
+gunicorn
+ultralytics
+gTTS
+Pillow
+numpy
+torch
+torchvision
