@@ -101,10 +101,4 @@ def predict():
         # هذا الجزء مهم جداً لمعرفة أي خطأ يحدث أثناء المعالجة
         print(f"❌ CRITICAL ERROR during processing: {str(e)}")
         return jsonify({'error': f'An error occurred during processing: {str(e)}'}), 500
-
-# --- تشغيل التطبيق ---
-if __name__ == '__main__':
-    # غيرنا المنفذ الافتراضي إلى 8000 لتجنب التعارض
-    port = int(os.environ.get('PORT', 8000))
-    app.run(host='0.0.0.0', port=port)
-
+ 
